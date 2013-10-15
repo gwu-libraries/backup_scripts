@@ -61,6 +61,6 @@ else
 			echo ""
 			du -sh $DESTINATION/* ) | mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
 	else
-		echo "Backup of $DB_TYPE database failed.  No backups exist!" mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
+		echo "Backup of $DB_TYPE database failed.  No backups exist!" | mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
 	fi
 fi
