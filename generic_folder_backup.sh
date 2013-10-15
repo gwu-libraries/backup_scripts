@@ -32,6 +32,6 @@ else
 			echo ""
 			du -sh $DESTINATION/* ) | mail -s "[backup] Report for $DNS" $EMAIL
 	else
-		echo "Backup of $SOURCE failed.  No backups exist!" mail -s "[backup] Report for $DNS" $EMAIL
+		echo "Backup of $SOURCE failed.  No backups exist!" | mail -s "[backup] Report for $DNS" $EMAIL
 	fi
 fi
