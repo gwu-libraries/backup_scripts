@@ -1,6 +1,18 @@
 #!/bin/bash
 #Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination> <path to passfile>
 #Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup /path/to/passfile
+
+##########
+#MySQL Setup:
+#Update .my.cnf
+##########
+
+##########
+#PostgreSQL Setup:
+#Update .pgpass
+#Set permissions 0600
+##########
+
 DNS=$1
 DB_TYPE=$2
 DB_NAME=$3
@@ -27,6 +39,8 @@ fi
 if [ $DB_TYPE = psql ]
 	then
 	pg_dump $DB_NAME -U $USERNAME -h localhost -F c > $DESTINATION/$NAME.sql
+	PGPASSFILE=""
+	export PGPASSFILE
 elif [ $DB_TYPE = mysql ] 
 	then
 	mysqldump --defaults-extra-file=$MYSQLCREDENTIALS -h localhost --lock-all-tables $DB_NAME > $DESTINATION/$NAME.sql
