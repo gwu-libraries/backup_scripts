@@ -33,7 +33,7 @@ else
 		then
 		( echo "Back of $SOURCE failed. The following backups exist:"
 			echo ""
-			du -sh $DESTINATION/* ) | mail -s "[backup] Report for $DNS" $EMAIL
+			du -sh $DESTINATION/*$(basename $SOURCE)* ) | mail -s "[backup] Report for $DNS" $EMAIL
 	else
 		echo "Backup of $SOURCE failed.  No backups exist!" | mail -s "[backup] Report for $DNS" $EMAIL
 	fi
