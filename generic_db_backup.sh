@@ -74,10 +74,10 @@ if [ -f $DESTINATION/$NAME.tar ]
 	#Send an email if successful and list all existing backups
 	( echo "Backup of $DB_TYPE database executed successfully.  The following backups exist:"
 		echo ""
-		du -sh $DESTINATION/* ) | mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
+		du -sh $DESTINATION/*SQL* ) | mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
 else
 	#If backup fails check for existing backups and alert accordingly
-	if [ "$(ls -A $DESTINATION)" ]
+	if [ "$(ls -A $DESTINATION/*SQL*)" ]
 		then
 		( echo "Back of $DB_TYPE database failed. The following backups exist:"
 			echo ""
