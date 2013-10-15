@@ -1,9 +1,10 @@
 #!/bin/bash
-#Usage: ./generic_folder_backup.sh <DNS name> <source folder> <destination>
-#Example ./generic_folder_backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup
+#Usage: ./generic_folder_backup.sh <DNS name> <source folder> <destination> <retention time in days>
+#Example ./generic_folder_backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup 7
 DNS=$1
 SOURCE=$2
 DESTINATION="$3/$DNS"
+TIME=$4
 NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-$(basename $SOURCE)-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
@@ -19,8 +20,10 @@ tar -zcvf $DESTINATION/$NAME.tar $SOURCE
 
 #Verify the compressed file was created
 if [ -f $DESTINATION/$NAME.tar ]
-	#Send an email if successful and list all existing backups
 	then
+	#Clean update existing backups if there is a current one
+	find $DESTINATION/*SQL*.tar -type f -mtime +$TIME -exec rm -f {} \;
+	#Send an email if successful and list all existing backups
 	( echo "Backup of $SOURCE executed successfully.  The following backups exist:"
 		echo ""
 		du -sh $DESTINATION/* ) | mail -s "[backup] Report for $DNS" $EMAIL
