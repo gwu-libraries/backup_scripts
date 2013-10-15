@@ -6,6 +6,7 @@
 ##########
 #MySQL Setup:
 #Update .my.cnf
+#Set permissions 0600
 ##########
 
 ##########
