@@ -17,8 +17,9 @@ DNS=$1
 DB_TYPE=$2
 DB_NAME=$3
 DESTINATION="$4/$DNS"
+USERNAME=$5
 #For PSQL backups you must create a .pgpass file for password authentication from the cron job
-PASSFILE=$5
+PASSFILE=$6
 if [$DB_TYPE = psql ]
 	then
 	PGPASSFILE=$PASSFILE
