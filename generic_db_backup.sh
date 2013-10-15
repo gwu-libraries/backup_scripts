@@ -10,7 +10,7 @@ PSQLCREDENTIALS=psqlbackupuser
 #For MYSQL backup you must specify the location of a custom .mycnf.ini file for authentication from the cron job
 MYSQLCREDENTIALS=$5
 NOW=$(date +"%b-%d-%y")
-NAME=$DNS-$NOW
+NAME=$DNS-SQL-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
 
 #Ensure backup destination exists
