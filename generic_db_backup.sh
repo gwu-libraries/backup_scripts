@@ -1,6 +1,6 @@
 #!/bin/bash
-#Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination>
-#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup /path/to/.mycnf (MySQL Only)
+#Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination> <path to .mycnf [MySQL Only])
+#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup
 DNS=$1
 DB_TYPE=$2
 DB_NAME=$3
