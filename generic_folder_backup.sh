@@ -22,7 +22,7 @@ tar -zcvf $DESTINATION/$NAME.tar $SOURCE
 if [ -f $DESTINATION/$NAME.tar ]
 	then
 	#Clean update existing backups if there is a current one
-	find $DESTINATION/*SQL*.tar -type f -mtime +$TIME -exec rm -f {} \;
+	find $DESTINATION/*$(basename $SOURCE)*.tar -type f -mtime +$TIME -exec rm -f {} \;
 	#Send an email if successful and list all existing backups
 	( echo "Backup of $SOURCE executed successfully.  The following backups exist:"
 		echo ""
