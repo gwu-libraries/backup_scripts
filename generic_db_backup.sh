@@ -19,14 +19,12 @@ DB_TYPE=$2
 DB_NAME=$3
 DESTINATION="$4/$DNS"
 USERNAME=$5
-#For PSQL backups you must create a .pgpass file for password authentication from the cron job
 PASSFILE=$6
 if [ $DB_TYPE = psql ]
 	then
 	PGPASSFILE=$PASSFILE
 	export PGPASSFILE
 fi
-#For MYSQL backup you must specify the location of a custom .mycnf.ini file for authentication from the cron job
 NOW=$(date +"%b-%d-%y")
 NAME=$DNS-SQL-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
