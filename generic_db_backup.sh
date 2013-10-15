@@ -1,14 +1,18 @@
 #!/bin/bash
-#Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination> <path to .mycnf> [MySQL Only])
-#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup
+#Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination> <path to passfile>
+#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup /path/to/passfile
 DNS=$1
 DB_TYPE=$2
 DB_NAME=$3
 DESTINATION="$4/$DNS"
 #For PSQL backups you must create a .pgpass file for password authentication from the cron job
-PSQLCREDENTIALS=psqlbackupuser
+PASSFILE=$5
+if [$DB_TYPE = psql ]
+	then
+	PGPASSFILE=$PASSFILE
+	export PGPASSFILE
+fi
 #For MYSQL backup you must specify the location of a custom .mycnf.ini file for authentication from the cron job
-MYSQLCREDENTIALS=$5
 NOW=$(date +"%b-%d-%y")
 NAME=$DNS-SQL-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
