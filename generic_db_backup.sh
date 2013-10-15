@@ -1,6 +1,6 @@
 #!/bin/bash
 #Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination>
-#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup
+#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup /path/to/.mycnf (MySQL Only)
 DNS=$1
 DB_TYPE=$2
 DB_NAME=$3
@@ -8,7 +8,7 @@ DESTINATION="$4/$DNS"
 #For PSQL backups you must create a .pgpass file for password authentication from the cron job
 PSQLCREDENTIALS=psqlbackupuser
 #For MYSQL backup you must specify the location of a custom .mycnf.ini file for authentication from the cron job
-MYSQLCREDENTIALS=
+MYSQLCREDENTIALS=$5
 NOW=$(date +"%b-%d-%y")
 NAME=$DNS-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
@@ -22,10 +22,10 @@ fi
 #Execute appropriate database dump for each DB type
 if [ $DB_TYPE = psql ]
 	then
-	pg_dump $DB_NAME -U $USERNAME -h $DNS -F c > $DESTINATION/$NAME.sql
+	pg_dump $DB_NAME -U $USERNAME -h localhost -F c > $DESTINATION/$NAME.sql
 elif [ $DB_TYPE = mysql ] 
 	then
-	mysqldump -h $DNS --defaults-extra-file=$MYSQLCREDENTIALS --lock-all-tables $DB_NAME > $DESTINATION/$NAME.sql
+	mysqldump --defaults-extra-file=$MYSQLCREDENTIALS -h localhost --lock-all-tables $DB_NAME > $DESTINATION/$NAME.sql
 else
 	echo "Invalid database type"
 fi
