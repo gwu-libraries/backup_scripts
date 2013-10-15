@@ -4,7 +4,7 @@
 DNS=$1
 SOURCE=$2
 DESTINATION="$3/$DNS"
-NOW=$(date +"%b-%d-%y")
+NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-$(basename $SOURCE)-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
 
