@@ -1,6 +1,7 @@
 #!/bin/bash
-#Usage: ./db_backup.sh <DNS name> <DB type> <DB name> <destination> <path to passfile>
-#Example ./backup.sh library.gwu.edu psql archiviststoolkit /vol/backup /path/to/passfile
+#Usage: ./generic_db_backup.sh <DNS name> <DB type> <DB name> <destination> <username> <path to passfile>
+#Example ./generic_db_backup.sh library.gwu.edu psql archiviststoolkit /vol/backup someuser /path/to/.pgpass
+#Example ./generic_db_backup.sh library.gwu.edu mysql archiviststoolkit /vol/backup someuser /path/to/.my.cnf
 
 ##########
 #MySQL Setup:
