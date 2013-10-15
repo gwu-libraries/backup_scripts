@@ -5,7 +5,7 @@ DNS=$1
 SOURCE=$2
 DESTINATION="$3/$DNS"
 NOW=$(date +"%b-%d-%y")
-NAME=$DNS-$NOW
+NAME=$DNS-$(basename $SOURCE)-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
 
 #Ensure backup destination exists
