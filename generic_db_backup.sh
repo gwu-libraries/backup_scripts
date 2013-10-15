@@ -33,7 +33,7 @@ fi
 #Compress the selected folder
 if [ -f $DESTINATION/$NAME.sql ]
 	then
-	tar -zcvf $DESTINATION/$NAME.tar DESTINATION/$NAME.sql
+	tar -zcvf $DESTINATION/$NAME.tar $DESTINATION/$NAME.sql
 else
 	echo "Database dumb failed"
 fi
