@@ -1,6 +1,6 @@
 #!/bin/bash
-#Usage: ./backup.sh <DNS name> <source folder> <destination>
-#Example ./backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup
+#Usage: ./generic_folder_backup.sh <DNS name> <source folder> <destination>
+#Example ./generic_folder_backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup
 DNS=$1
 SOURCE=$2
 DESTINATION="$3/$DNS"
