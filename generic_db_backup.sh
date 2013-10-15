@@ -1,7 +1,7 @@
 #!/bin/bash
-#Usage: ./generic_db_backup.sh <DNS name> <DB type> <DB name> <destination> <username> <path to passfile>
-#Example ./generic_db_backup.sh library.gwu.edu psql archiviststoolkit /vol/backup someuser /path/to/.pgpass
-#Example ./generic_db_backup.sh library.gwu.edu mysql archiviststoolkit /vol/backup someuser /path/to/.my.cnf
+#Usage: ./generic_db_backup.sh <DNS name> <DB type> <DB name> <destination> <username> <path to passfile> <retention time in days>
+#Example ./generic_db_backup.sh library.gwu.edu psql archiviststoolkit /vol/backup someuser /path/to/.pgpass 7
+#Example ./generic_db_backup.sh library.gwu.edu mysql archiviststoolkit /vol/backup someuser /path/to/.my.cnf 7
 
 ##########
 #MySQL Setup:
@@ -25,6 +25,7 @@ if [ $DB_TYPE = psql ]
 	PGPASSFILE=$PASSFILE
 	export PGPASSFILE
 fi
+TIME=$7
 NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-SQL-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
@@ -66,8 +67,10 @@ fi
 
 #Verify the compressed file was created
 if [ -f $DESTINATION/$NAME.tar ]
-	#Send an email if successful and list all existing backups
 	then
+	#Cleanup existing backups if there is a current one
+	find $DESTINATION/*SQL*.tar -type f -mtime +$TIME -exec rm -f {} \;
+	#Send an email if successful and list all existing backups
 	( echo "Backup of $DB_TYPE database executed successfully.  The following backups exist:"
 		echo ""
 		du -sh $DESTINATION/* ) | mail -s "['$DB_TYPE'dump] Report for $DNS" $EMAIL
