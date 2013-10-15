@@ -25,7 +25,7 @@ if [ $DB_TYPE = psql ]
 	PGPASSFILE=$PASSFILE
 	export PGPASSFILE
 fi
-NOW=$(date +"%b-%d-%y")
+NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-SQL-$NOW
 EMAIL=gwlib-root@groups.gwu.edu
 
