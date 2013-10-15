@@ -38,7 +38,7 @@ fi
 #Execute appropriate database dump for each DB type
 if [ $DB_TYPE = psql ]
 	then
-	pg_dump $DB_NAME -U $USERNAME -h localhost -F c > $DESTINATION/$NAME.sql
+	pg_dump $DB_NAME -U $USERNAME -h localhost -Fc > $DESTINATION/$NAME.sql
 	PGPASSFILE=""
 	export PGPASSFILE
 elif [ $DB_TYPE = mysql ] 
