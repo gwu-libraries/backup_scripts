@@ -1,7 +1,7 @@
 #!/bin/bash
-#Usage: ./generic_db_backup.sh <DNS name> <DB type> <DB name> <destination> <username> <path to passfile> <retention time in days>
-#Example ./generic_db_backup.sh library.gwu.edu psql archiviststoolkit /vol/backup someuser /path/to/.pgpass 7
-#Example ./generic_db_backup.sh library.gwu.edu mysql archiviststoolkit /vol/backup someuser /path/to/.my.cnf 7
+#Usage: ./generic_db_backup.sh <DNS name> <DB type> <DB name> <destination> <username> <path to passfile> <retention time in days> <recipient email>
+#Example ./generic_db_backup.sh library.gwu.edu psql archiviststoolkit /vol/backup someuser /path/to/.pgpass 7 noreply@gwu.edu
+#Example ./generic_db_backup.sh library.gwu.edu mysql archiviststoolkit /vol/backup someuser /path/to/.my.cnf 7 noreply@gwu.edu
 
 ##########
 #MySQL Setup:
@@ -29,7 +29,7 @@ fi
 TIME=$7
 NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-SQL-$NOW
-EMAIL=gwlib-root@groups.gwu.edu
+EMAIL=$8
 
 #Ensure backup destination exists
 if [ ! -d $DESTINATION ]
