@@ -1,13 +1,13 @@
 #!/bin/bash
-#Usage: ./generic_folder_backup.sh <DNS name> <source folder> <destination> <retention time in days>
-#Example ./generic_folder_backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup 7
+#Usage: ./generic_folder_backup.sh <DNS name> <source folder> <destination> <retention time in days> <recipient email>
+#Example ./generic_folder_backup.sh library.gwu.edu /etc/apache2/sites-available /vol/backup 7 noreply@gwu.edu
 DNS=$1
 SOURCE=$2
 DESTINATION="$3/$DNS"
 TIME=$4
 NOW=$(date +"%b-%d-%y-%H:%M:%S")
 NAME=$DNS-$(basename $SOURCE)-$NOW
-EMAIL=gwlib-root@groups.gwu.edu
+EMAIL=$5
 
 #Ensure backup destination exists
 if [ ! -d $DESTINATION ]
