@@ -45,7 +45,7 @@ if [ $DB_TYPE = psql ]
 	export PGPASSFILE
 elif [ $DB_TYPE = mysql ] 
 	then
-	mysqldump --defaults-extra-file=$PASSFILE -h localhost --lock-all-tables $DB_NAME > $DESTINATION/$NAME.sql
+	mysqldump --defaults-extra-file=$PASSFILE -h localhost --single-transaction $DB_NAME > $DESTINATION/$NAME.sql
 else
 	echo "Invalid database type"
 fi
