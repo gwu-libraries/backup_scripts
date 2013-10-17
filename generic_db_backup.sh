@@ -55,7 +55,7 @@ if [ -f $DESTINATION/$NAME.sql ]
 	then
 	tar -zcvf $DESTINATION/$NAME.tar $DESTINATION/$NAME.sql
 else
-	echo "Database dumb failed"
+	echo "Database dump failed"
 fi
 
 #Cleanup sql files if tar files exist
